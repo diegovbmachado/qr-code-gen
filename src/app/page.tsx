@@ -8,6 +8,20 @@ export default function Home() {
   const [linkValue, setLinkValue] = useState<string>('');
   const [fgColor, setFgColor] = useState<string>('#000000');
   const [bgColor, setBgColor] = useState<string>('#ffffff');
+  const [logo, setLogoUrl] = useState<string>('/logo-light.png');
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result) {
+        setLogoUrl(reader.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   return (
     <main className="container">
       <section className="title-content">
@@ -41,7 +55,7 @@ export default function Home() {
               bgColor={bgColor}
               fgColor={fgColor}
               imageSettings={{
-                src: "https://static.zpao.com/favicon.png",
+                src: logo,
                 x: undefined,
                 y: undefined,
                 height: 24,
@@ -89,6 +103,7 @@ export default function Home() {
                   className="input-file"
                   id="logo"
                   accept="image/*"
+                  onChange={handleLogoChange}
                   style={{
                     position: "absolute",
                     left: 0,
