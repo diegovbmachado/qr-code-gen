@@ -1,9 +1,7 @@
 "use client";
-import {QRCodeCanvas} from 'qrcode.react';
+import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import { FaUpload } from "react-icons/fa";
-
-
 
 export default function Home() {
   return (
@@ -64,14 +62,22 @@ export default function Home() {
           <div className="customization-container">
             <h3>Logo</h3>
             <div className="input-container">
-              <div className="input-box" style={{ position: 'relative' }}>
+              <div className="input-box" style={{ position: "relative" }}>
                 <label htmlFor="logo">Insira seu logo</label>
                 <input
                   type="file"
                   className="input-file"
                   id="logo"
                   accept="image/*"
-                  style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '40px', opacity: 0, cursor: 'pointer' }}
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "40px",
+                    opacity: 0,
+                    cursor: "pointer",
+                  }}
                 />
                 <button className="input-file-button" type="button">
                   <FaUpload /> Escolher arquivo
