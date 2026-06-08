@@ -2,8 +2,12 @@
 import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import { FaUpload } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Home() {
+  const [linkValue, setLinkValue] = useState<string>('');
+  const [fgColor, setFgColor] = useState<string>('#000000');
+  const [bgColor, setBgColor] = useState<string>('#ffffff');
   return (
     <main className="container">
       <section className="title-content">
@@ -23,16 +27,19 @@ export default function Home() {
         <div className="qr-code">
           <div className="link-input">
             <label htmlFor="link">Digite seu link</label>
-            <input type="text" id="link" placeholder="Seu link aqui" />
+            <input type="text" id="link" placeholder="Seu link aqui"
+            value={linkValue}
+            onChange={(e) => setLinkValue(e.target.value)}
+           />
           </div>
           <div className="qr-code-preview">
             <p>QR Code Preview</p>
             <QRCodeCanvas
-              value={"https://diegovbmachado.github.io/Landing_page_final/"}
-              title={"https://diegovbmachado.github.io/Landing_page_final/"}
+              value={linkValue}
+              title={linkValue}
               size={200}
-              bgColor={"#ffffff"}
-              fgColor={"#000000"}
+              bgColor={bgColor}
+              fgColor={fgColor}
               imageSettings={{
                 src: "https://static.zpao.com/favicon.png",
                 x: undefined,
@@ -50,12 +57,25 @@ export default function Home() {
             <h3>Cores</h3>
             <div className="input-container colors">
               <div className="input-box">
-                <label htmlFor="fgColor">Cor principal</label>
-                <input type="color" className="input-color" id="fgColor" />
+                <label htmlFor="fgColor">
+                  Cor principal</label>
+                <input type="color" 
+                className="input-color" 
+                id="fgColor" 
+                value={fgColor}
+                onChange={(e) => setFgColor(e.target.value)}
+                />
               </div>
               <div className="input-box">
-                <label htmlFor="bgColor">Cor do fundo</label>
-                <input type="color" className="input-color" id="bgColor" />
+                <label htmlFor="bgColor">
+                  Cor do fundo
+                  </label>
+                <input type="color" 
+                className="input-color" 
+                id="bgColor" 
+                value={bgColor}
+                onChange={(e) => setBgColor(e.target.value)}
+                />
               </div>
             </div>
           </div>

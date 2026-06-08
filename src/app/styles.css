@@ -31,6 +31,7 @@
 	position: absolute;
 	right: -90px;
 	height: 130px;
+	width: auto;
 	top: 10px;
 	transform: rotate(-10deg);
 }
