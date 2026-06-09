@@ -9,6 +9,7 @@ export default function Home() {
   const [fgColor, setFgColor] = useState<string>('#000000');
   const [bgColor, setBgColor] = useState<string>('#ffffff');
   const [logo, setLogoUrl] = useState<string>('/logo-light.png');
+  const [logoSize, setLogoSize] = useState<number>(38);
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -58,8 +59,8 @@ export default function Home() {
                 src: logo,
                 x: undefined,
                 y: undefined,
-                height: 24,
-                width: 24,
+                height: logoSize,
+                width: logoSize,
                 opacity: 1,
                 excavate: true,
               }}
@@ -120,7 +121,12 @@ export default function Home() {
               </div>
               <div className="input-box">
                 <label htmlFor="logoSize">Tamanho da logo</label>
-                <select name="logoSize" id="logoSize">
+                <select 
+                name="logoSize" 
+                id="logoSize"
+                value={logoSize}
+                onChange={(e) => setLogoSize(Number(e.target.value))}
+                >
                   <option value="24">24px x 24px</option>
                   <option value="38">38px x 38px</option>
                   <option value="50">50px x 50px</option>
