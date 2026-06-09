@@ -115,27 +115,18 @@ const handleDownload = () => {
           <div className="customization-container">
             <h3>Logo</h3>
             <div className="input-container">
-              <div className="input-box" style={{ position: "relative" }}>
+              <div className="input-box">
                 <label htmlFor="logo">Insira seu logo</label>
                 <input
                   type="file"
-                  className="input-file"
+                  className="input-file-hidden"
                   id="logo"
                   accept="image/*"
                   onChange={handleLogoChange}
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    width: "100%",
-                    height: "40px",
-                    opacity: 0,
-                    cursor: "pointer",
-                  }}
                 />
-                <button className="input-file-button" type="button">
+                <label htmlFor="logo" className="input-file-button">
                   <FaUpload /> Escolher arquivo
-                </button>
+                </label>
               </div>
               <div className="input-box">
                 <label htmlFor="logoSize">Tamanho da logo</label>
