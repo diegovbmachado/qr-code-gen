@@ -5,10 +5,10 @@ import { FaUpload } from "react-icons/fa";
 import { useRef, useState } from "react";
 
 export default function Home() {
-  const [linkValue, setLinkValue] = useState<string>('');
-  const [fgColor, setFgColor] = useState<string>('#000000');
-  const [bgColor, setBgColor] = useState<string>('#ffffff');
-  const [logo, setLogoUrl] = useState<string>('/logo-light.png');
+  const [linkValue, setLinkValue] = useState<string>("");
+  const [fgColor, setFgColor] = useState<string>("#000000");
+  const [bgColor, setBgColor] = useState<string>("#ffffff");
+  const [logo, setLogoUrl] = useState<string>("/logo-light.png");
   const [logoSize, setLogoSize] = useState<number>(38);
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,23 +18,22 @@ export default function Home() {
 
       reader.onload = () => {
         if (reader.result) {
-        setLogoUrl(reader.result as string);
+          setLogoUrl(reader.result as string);
         }
       };
       reader.readAsDataURL(file);
     }
-  }
-const handleDownload = () => {
- if(!qrCodeRef.current) return;
- const canvas = qrCodeRef.current.querySelector('canvas');
- if(!canvas) return;
+  };
+  const handleDownload = () => {
+    if (!qrCodeRef.current) return;
+    const canvas = qrCodeRef.current.querySelector("canvas");
+    if (!canvas) return;
 
-  const link = document.createElement('a');
-  link.href = canvas.toDataURL('image/png');
-  link.download = 'qr-code.png';
-  link.click();
-};
-
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "qr-code.png";
+    link.click();
+  };
 
   return (
     <main className="container">
@@ -55,34 +54,36 @@ const handleDownload = () => {
         <div className="qr-code">
           <div className="link-input">
             <label htmlFor="link">Digite seu link</label>
-            <input type="text" id="link" placeholder="Seu link aqui"
-            value={linkValue}
-            onChange={(e) => setLinkValue(e.target.value)}
-           />
+            <input
+              type="text"
+              id="link"
+              placeholder="Seu link aqui"
+              value={linkValue}
+              onChange={(e) => setLinkValue(e.target.value)}
+            />
           </div>
           <div className="qr-code-preview">
             <p>QR Code Preview</p>
 
             <div ref={qrCodeRef} className="qr-code-preview-container">
-            <QRCodeCanvas
-              value={linkValue}
-              title={linkValue}
-              size={200}
-              bgColor={bgColor}
-              fgColor={fgColor}
-              imageSettings={{
-                src: logo,
-                x: undefined,
-                y: undefined,
-                height: logoSize,
-                width: logoSize,
-                opacity: 1,
-                excavate: true,
-                crossOrigin: "anonymous",
-              }}
-            />
+              <QRCodeCanvas
+                value={linkValue}
+                title={linkValue}
+                size={200}
+                bgColor={bgColor}
+                fgColor={fgColor}
+                imageSettings={{
+                  src: logo,
+                  x: undefined,
+                  y: undefined,
+                  height: logoSize,
+                  width: logoSize,
+                  opacity: 1,
+                  excavate: true,
+                  crossOrigin: "anonymous",
+                }}
+              />
             </div>
-
           </div>
         </div>
         <div className="qr-code-customize">
@@ -90,24 +91,23 @@ const handleDownload = () => {
             <h3>Cores</h3>
             <div className="input-container colors">
               <div className="input-box">
-                <label htmlFor="fgColor">
-                  Cor principal</label>
-                <input type="color" 
-                className="input-color" 
-                id="fgColor" 
-                value={fgColor}
-                onChange={(e) => setFgColor(e.target.value)}
+                <label htmlFor="fgColor">Cor principal</label>
+                <input
+                  type="color"
+                  className="input-color"
+                  id="fgColor"
+                  value={fgColor}
+                  onChange={(e) => setFgColor(e.target.value)}
                 />
               </div>
               <div className="input-box">
-                <label htmlFor="bgColor">
-                  Cor do fundo
-                  </label>
-                <input type="color" 
-                className="input-color" 
-                id="bgColor" 
-                value={bgColor}
-                onChange={(e) => setBgColor(e.target.value)}
+                <label htmlFor="bgColor">Cor do fundo</label>
+                <input
+                  type="color"
+                  className="input-color"
+                  id="bgColor"
+                  value={bgColor}
+                  onChange={(e) => setBgColor(e.target.value)}
                 />
               </div>
             </div>
@@ -130,11 +130,11 @@ const handleDownload = () => {
               </div>
               <div className="input-box">
                 <label htmlFor="logoSize">Tamanho da logo</label>
-                <select 
-                name="logoSize" 
-                id="logoSize"
-                value={logoSize}
-                onChange={(e) => setLogoSize(Number(e.target.value))}
+                <select
+                  name="logoSize"
+                  id="logoSize"
+                  value={logoSize}
+                  onChange={(e) => setLogoSize(Number(e.target.value))}
                 >
                   <option value="24">24px x 24px</option>
                   <option value="38">38px x 38px</option>
@@ -144,7 +144,8 @@ const handleDownload = () => {
             </div>
           </div>
           <button className="download-button" onClick={handleDownload}>
-            Baixar QR Code</button>
+            Baixar QR Code
+          </button>
         </div>
       </section>
     </main>
