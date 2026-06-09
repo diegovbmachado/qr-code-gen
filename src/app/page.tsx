@@ -2,7 +2,7 @@
 import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import { FaUpload } from "react-icons/fa";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const [linkValue, setLinkValue] = useState<string>('');
@@ -10,10 +10,12 @@ export default function Home() {
   const [bgColor, setBgColor] = useState<string>('#ffffff');
   const [logo, setLogoUrl] = useState<string>('/logo-light.png');
   const [logoSize, setLogoSize] = useState<number>(38);
+  const qrCodeRef = useRef<HTMLDivElement>(null);
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+
       reader.onload = () => {
         if (reader.result) {
         setLogoUrl(reader.result as string);
@@ -22,6 +24,17 @@ export default function Home() {
       reader.readAsDataURL(file);
     }
   }
+const handleDownload = () => {
+ if(!qrCodeRef.current) return;
+ const canvas = qrCodeRef.current.querySelector('canvas');
+ if(!canvas) return;
+
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL('image/png');
+  link.download = 'qr-code.png';
+  link.click();
+};
+
 
   return (
     <main className="container">
@@ -49,6 +62,8 @@ export default function Home() {
           </div>
           <div className="qr-code-preview">
             <p>QR Code Preview</p>
+
+            <div ref={qrCodeRef} className="qr-code-preview-container">
             <QRCodeCanvas
               value={linkValue}
               title={linkValue}
@@ -65,6 +80,8 @@ export default function Home() {
                 excavate: true,
               }}
             />
+            </div>
+
           </div>
         </div>
         <div className="qr-code-customize">
@@ -134,7 +151,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <button className="download-button">Baixar QR Code</button>
+          <button className="download-button" onClick={handleDownload}>
+            Baixar QR Code</button>
         </div>
       </section>
     </main>
