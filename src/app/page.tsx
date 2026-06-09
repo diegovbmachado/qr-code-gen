@@ -78,6 +78,7 @@ const handleDownload = () => {
                 width: logoSize,
                 opacity: 1,
                 excavate: true,
+                crossOrigin: "anonymous",
               }}
             />
             </div>
